@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "TaskLocalServiceProvider.deleteTask(taskId:):TaskLocalServiceProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "allTasks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TaskLocalServiceProvider.save(task:):TaskLocalServiceProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "allTasks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in TasksViewController.addAction(_:):TasksViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TaskLocalServiceProvider.findAll():TaskLocalServiceProvider.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TaskLocalServiceProvider.update(task:):TaskLocalServiceProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "allTasks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
