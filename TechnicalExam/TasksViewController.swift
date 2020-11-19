@@ -13,7 +13,8 @@ class TasksViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var taskPresenter = TasksViewPresenter()
     let cellIdentifier = "CellId"
-    
+    let saveText = "Save"
+    let descriptionText = "Enter Description"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,22 +35,25 @@ class TasksViewController: UIViewController {
     }
     
     @IBAction func addAction(_ sender: Any) {
-        alertController(title: "Enter Description", buttonTitle: "Save", indexPath: nil)
+        alertController(title: descriptionText, buttonTitle: saveText, indexPath: nil)
     }
     
     func alertController(title:String, buttonTitle:String, indexPath:IndexPath?){
         let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             ac.addTextField()
-
+        if let index = indexPath{
+            let task = tasks[index.row]
+            ac.textFields?[0].text = task.description
+        }
+        
         let submitAction = UIAlertAction(title: buttonTitle, style: .default) { [unowned ac] _ in
             let string = ac.textFields?[0].text ?? "No Description"
-            if(buttonTitle == "Save"){
+            if(buttonTitle == self.saveText){
                 self.add(text: string)
             }else{
                 if let index = indexPath{
                     self.update(text: string, indexPath: index)
                 }
-                
             }
         }
 
@@ -87,13 +91,11 @@ extension TasksViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
-            //TODO: edit the row at indexPath here
-            self.alertController(title: "Enter Description", buttonTitle: "Update", indexPath: indexPath)
+            self.alertController(title: self.descriptionText, buttonTitle: "Update", indexPath: indexPath)
         }
         editAction.backgroundColor = .blue
 
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
-            //TODO: Delete the row at indexPath here
             let task = self.tasks[indexPath.row]
             self.removeTaskFromList(task: task)
             self.tasks.remove(at: indexPath.row)
@@ -157,9 +159,7 @@ extension TasksViewController: UITableViewDataSource {
 
 extension TasksViewController:TaskView{
     func checkMarkTapped(taskId: UUID) {
-        DispatchQueue.main.async {
-            self.taskPresenter.checkedTask(taskId: taskId)
-        }
+        self.taskPresenter.checkedTask(taskId: taskId)
     }
     
     func addTaskToList(task: Task) {
